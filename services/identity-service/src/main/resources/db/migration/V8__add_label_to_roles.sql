@@ -1,0 +1,2 @@
+ALTER TABLE roles
+    ADD COLUMN label VARCHAR(255);
