@@ -1,0 +1,5 @@
+CREATE TABLE api_keys (
+   id UUID PRIMARY KEY,
+   name VARCHAR(255) NOT NULL,
+   hashed_key VARCHAR(255) NOT NULL UNIQUE
+);
