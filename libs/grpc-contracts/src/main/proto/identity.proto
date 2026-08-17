@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package identity;
+
+option java_package = "br.com.deltaglobalbank.identity.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "IdentityProto";
+
+service IdentityInternalService {
+  rpc ExchangeApiKey(ExchangeApiKeyRequest) returns (ExchangeApiKeyResponse);
+}
+
+message ExchangeApiKeyRequest {
+  string api_key = 1;
+
+  string source_ip = 2;
+
+  string user_agent = 3;
+}
+
+message ExchangeApiKeyResponse {
+  string internal_token = 1;
+
+  int64 expires_at_epoch_seconds = 2;
+
+  string principal_id = 3;
+
+  string tenant_id = 4;
+}

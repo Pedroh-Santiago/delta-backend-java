@@ -1,0 +1,26 @@
+###
+POST localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{user}}",
+  "password": "{{password}}"
+}
+
+> {%
+    client.global.set("auth_token", response.body.accessToken);
+%}
+
+###
+
+###
+POST localhost:8080/admin/tenants/019e8482-123c-7c53-8fe6-d2cace9cf698/api-clients/019ecba0-6a9d-7f93-8209-03b3f9c746e2/keys
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "name": "ERP-key1"
+}
+
+###

@@ -1,0 +1,1 @@
+ALTER TABLE internal_transferences ADD COLUMN payer_id BIGINT NOT NULL;

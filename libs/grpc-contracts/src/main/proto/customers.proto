@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package customers;
+option java_package = "br.com.deltaglobalbank.customers.grpc";
+option java_multiple_files = true;
+
+service CustomersInternalService {
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse);
+  rpc GetCustomerByCpf(GetCustomerByCpfRequest) returns (GetCustomerResponse);
+  rpc BatchGetCustomers(BatchGetCustomersRequest) returns (BatchGetCustomersResponse);
+  rpc SearchCustomers(SearchCustomersRequest) returns (SearchCustomersResponse);
+}
+
+message GetCustomerRequest {
+  string customer_id = 1;
+  string tenant_id = 2;
+}
+
+message GetCustomerByCpfRequest {
+  string cpf = 1;
+  string tenant_id = 2;
+}
+
+message BatchGetCustomersRequest {
+  repeated string customer_ids = 1;
+  string tenant_id = 2;
+}
+
+message SearchCustomersRequest {
+  string query = 1;
+  string tenant_id = 2;
+  int32 limit = 3;
+}
+
+message GetCustomerResponse {
+  CustomerSummary customer = 1;
+}
+
+message BatchGetCustomersResponse {
+  repeated CustomerSummary customers = 1;
+}
+
+message SearchCustomersResponse {
+  repeated CustomerSummary customers = 1;
+}
+
+message CustomerSummary {
+  string id = 1;
+  string tenant_id = 2;
+  string cpf = 3;
+  string full_name = 4;
+  string birth_date = 5;
+  string status = 6;
+  string phone_number = 7;
+  string email = 8;
+  PrimaryDisbursementAccount primary_disbursement_account = 9;
+}
+
+message PrimaryDisbursementAccount {
+  string bank_code = 1;
+  string agency = 2;
+  string account_number = 3;
+  string account_digit = 4;
+  string account_type = 5;
+}

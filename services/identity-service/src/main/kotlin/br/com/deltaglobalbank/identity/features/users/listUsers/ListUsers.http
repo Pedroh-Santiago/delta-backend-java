@@ -1,0 +1,35 @@
+###
+POST localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{user}}",
+  "password": "{{password}}"
+}
+
+> {%
+    client.global.set("auth_token", response.body.accessToken);
+%}
+
+###
+
+###
+GET localhost:8080/admin/users
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+
+###
+GET localhost:8080/admin/tenants/{{tenantId}}/users?page=0&size=20
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+
+###
+GET localhost:8080/me
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###

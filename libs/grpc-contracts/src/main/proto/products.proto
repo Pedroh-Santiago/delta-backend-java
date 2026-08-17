@@ -1,0 +1,45 @@
+syntax = "proto3";
+package products;
+option java_package = "br.com.deltaglobalbank.products.grpc";
+option java_multiple_files = true;
+
+service ProductsInternalService {
+  rpc GetProductById(GetProductByIdRequest) returns (ProductResponse);
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  rpc ListActiveProductsByType(ListActiveProductsByTypeRequest) returns (ListProductsResponse);
+}
+
+message GetProductByIdRequest {
+  string product_id = 1;
+  string tenant_id = 2;
+}
+message ListProductsRequest {
+  string tenant_id = 1;
+  string type = 2;
+  optional bool active = 3;
+  string agreement_name = 4;
+}
+message ListActiveProductsByTypeRequest {
+  string tenant_id = 1;
+  string type = 2;
+}
+message ListProductsResponse { repeated ProductSummary products = 1; }
+message ProductResponse { ProductSummary product = 1; }
+
+message ProductSummary {
+  string id = 1;
+  string tenant_id = 2;
+  string type = 3;
+  string agreement_name = 4;
+  string display_name = 5;
+  string min_monthly_rate = 6;
+  string max_monthly_rate = 7;
+  int32 min_months = 8;
+  int32 max_months = 9;
+  string min_amount = 10;
+  string max_amount = 11;
+  string commission_rate = 12;
+  bool active = 13;
+  string created_at = 14;
+  string updated_at = 15;
+}

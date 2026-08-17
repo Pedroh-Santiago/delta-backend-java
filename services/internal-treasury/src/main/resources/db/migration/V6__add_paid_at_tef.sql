@@ -1,0 +1,1 @@
+ALTER TABLE internal_transferences ADD COLUMN paid_at TIMESTAMP;
