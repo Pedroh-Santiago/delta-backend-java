@@ -1,16 +1,20 @@
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.spring")
     `java-library`
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 dependencies {
     implementation(platform("org.springframework.boot:spring-boot-dependencies:4.1.0"))
+    annotationProcessor(platform("org.springframework.boot:spring-boot-dependencies:4.1.0"))
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("com.nimbusds:nimbus-jose-jwt:9.40")
+    compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
 }
-
-kotlin { jvmToolchain(21) }
