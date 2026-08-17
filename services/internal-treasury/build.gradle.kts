@@ -1,9 +1,7 @@
 plugins {
-	kotlin("jvm")
-	kotlin("plugin.spring")
+	java
 	id("org.springframework.boot") version "4.1.0"
 	id("io.spring.dependency-management") version "1.1.7"
-	kotlin("plugin.jpa")
 }
 
 tasks.withType<Test> {
@@ -29,15 +27,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
 	implementation("org.apache.httpcomponents.client5:httpclient5")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.flywaydb:flyway-database-postgresql")
 	implementation("com.github.f4b6a3:uuid-creator:5.3.7")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("tools.jackson.module:jackson-module-kotlin")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
 	testImplementation("org.testcontainers:testcontainers-postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-amqp-test")
@@ -45,26 +41,11 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-security-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
-	testImplementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation("org.junit.jupiter:junit-jupiter")
+	testImplementation("org.mockito:mockito-core")
+	testImplementation("org.mockito:mockito-junit-jupiter")
 	testImplementation("org.testcontainers:testcontainers-junit-jupiter")
 	testImplementation("org.testcontainers:testcontainers-rabbitmq")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
-	}
-}
-
-allOpen {
-	annotation("jakarta.persistence.Entity")
-	annotation("jakarta.persistence.MappedSuperclass")
-	annotation("jakarta.persistence.Embeddable")
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
 }
