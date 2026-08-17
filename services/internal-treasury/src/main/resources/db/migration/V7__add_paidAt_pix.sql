@@ -1,0 +1,1 @@
+ALTER TABLE pix_payments ADD COLUMN paid_at TIMESTAMP;
